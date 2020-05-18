@@ -1,9 +1,19 @@
-import os
+from os import system,name
 import random
-from sys import argv
+from copy import deepcopy
+import argparse
+import math
+try:
+    if name=="nt":
+        import msvcrt as getch
+    else:
+        import getch
+except ImportError:
+        print("Importing module....")
+        system('pip install getch')
 
 def clearscreen():
-    return os.system("cls") if os.name == "nt" else os.system("clear")
+    return system("cls") if name == "nt" else system("clear")
 
 def random_generator(board_view):
     while 1:
@@ -22,45 +32,23 @@ def initial_setup():
 def display_game(board_view):
     return '\n\n'.join('\t'.join(str(element) for element in row) for row in board_view)
 
-def is_shift_possible(row):
-    for index, value in enumerate(row[:-1]):
-        if value == 0 and row[index + 1] != 0:
-            return True
-        elif value == row[index + 1] and value != 0:
-            return True
-    else:
-        return False
-
-def process_shift(board_view):
-    return any(is_shift_possible(row) for row in board_view) == 1
-#print(process_shift([[0,2],[0,0]]))
-
 def shift_left(board_view):
-    return shift_values(board_view) if process_shift(board_view) else False
+    return shift_values(board_view)
 
 def shift_right(board_view):
     flip_board_sideways = [[board_view[i][board_size-1-j] for j in range(board_size)] for i in range(board_size)]
-    if process_shift(flip_board_sideways):
-        new_board_view = shift_values(flip_board_sideways)
-        return [[new_board_view[i][board_size - 1 - j] for j in range(board_size)] for i in range(board_size)]
-    else:
-        return False
+    new_board_view = shift_values(flip_board_sideways)
+    return [[new_board_view[i][board_size - 1 - j] for j in range(board_size)] for i in range(board_size)]
 
 def shift_upwards(board_view):
     transpose_boardview = [[board_view[j][i] for j in range(board_size)] for i in range(board_size)]
-    if process_shift(transpose_boardview):
-        new_board_view = shift_values(transpose_boardview)
-        return [[new_board_view[j][i] for j in range(board_size)] for i in range(board_size)]
-    else:
-        return False
+    new_board_view = shift_values(transpose_boardview)
+    return [[new_board_view[j][i] for j in range(board_size)] for i in range(board_size)]
 
 def shift_downwards(board_view):
     transpose_flip_board = [[board_view[board_size - 1 - j][i] for j in range(board_size)] for i in range(board_size)]
-    if process_shift(transpose_flip_board):
-        new_board_view = shift_values(transpose_flip_board)
-        return [[new_board_view[j][board_size - 1 - i] for j in range(board_size)] for i in range(board_size)]
-    else:
-        return False
+    new_board_view = shift_values(transpose_flip_board)
+    return [[new_board_view[j][board_size - 1 - i] for j in range(board_size)] for i in range(board_size)]
 
 def move_zero_to_end(row):
     return [not_zero for not_zero in row if not_zero != 0] + [zero for zero in row if zero == 0]
@@ -76,90 +64,76 @@ def shift_values(board_view):
                 board_view[row_num] = move_zero_to_end(board_view[row_num])
     return board_view
 
-#board_size = 2
-#print((shift_right([[0,2],[0,0]])))
 def empty_space(board_view):
     single_list = [value for row in board_view for value in row]
     return single_list.count(0) > 0
-def nand(board_view):
-    situation = []
-    for move in "wdsa":
-        situation.append(shift_operation[move.lower()](board_view))
-    return situation.count(0) == 4
+
 def check_move(board_view, MOVE):
     shift_operation = {"a": shift_left, "s": shift_downwards, "d": shift_right, "w": shift_upwards}
-
-    new_board_view = shift_operation[MOVE.lower()](board_view)
-
-    if new_board_view == False:
-        return "Invalid input"
+    if MOVE != 't':
+        temp = deepcopy(board_view)
+        board_view = shift_operation[MOVE.lower()](board_view)
+        if temp == board_view:
+            print("Try another move")
+            return board_view
+    if empty_space(board_view):
+        if MOVE != 't':
+            board_view = random_generator(board_view)
+        return board_view
     else:
-        if empty_space(new_board_view):
-            updated_board_view = random_generator(new_board_view)
-            return updated_board_view
-        else:
-            return new_board_view
-#shift_operation = {"a": shift_left, "s": shift_downwards, "d": shift_right, "w": shift_upwards}
-
-#board_size=2
-#print(check_move([[0,2],[0,0]],[[0,2],[0,0]],"d"))
-#print(display_game(check_move([[0,0],[2,2]],"a"))
-#print(display_game(check_move([[2,2,2,], [2,2,0,], [4,0,2,]],"s")))
-
-# def game_play(board_view, operation):
-#    if operation  in "wasde":
-#        if operation == "e":
-#            return "Game over"
-#        for row in board_view:
-#            if NUM_TO_WIN in row:
-#                return "Game Won"
-#        print(display_game(board_view))
-#        operation = input("Enter w/a/s/d to play, e to exit ")
-#        board_view = check_move(board_view, operation)
-#        if check_move(board_view, operation) == "Game lost":
-#            return "Game lost"
-#        return game_play(board_view,operation)
-#    else:
-#        return "Invalid Move"
-def game_play(board_view, operation):
-    if operation in "wasde":
-        if operation == "e":
-            return "Game over"
-        for row in board_view:
-            if NUM_TO_WIN in row:
-                return "Game won"
-        temporary_board_view = check_move(board_view, operation)
-        if temporary_board_view == "Invalid input":
-            if nand(temporary_board_view):
-                return "Game lost"
-            else:
-                print("Please enter another number!")
-                operation = input("Enter w/a/s/d to play or e to exit: ")
-                return game_play(board_view, operation)
-        elif temporary_board_view == "Game lost":
+        count = 0
+        temp = deepcopy(board_view)
+        for move in "wdsa":
+            if temp == shift_operation[move](board_view):
+                count += 1
+        if count == 4:
             return "Game lost"
         else:
-            new_board_view = temporary_board_view
-            print(display_game(new_board_view))
+            return temp
 
-            operation = input("Enter w/a/s/d to play or e to exit: ")
-            return game_play(new_board_view, operation)
+def game_play(board_view):
+    board_view = check_move(board_view, 't')
+    if board_view =="Game lost":
+        return "Game lost"
     else:
-        print("Invalid input")
-        operation = input("Enter w/a/s/d to play or e to exit: ")
-        return game_play(board_view, operation)
-shift_operation = {"a": shift_left, "s": shift_downwards, "d": shift_right, "w": shift_upwards}
+        for row in board_view:
+            if NUM_TO_WIN in row:
+                return "\nGame Won"
+        print("Enter w/a/s/d to play or e to exit: ")
+        if name == "nt":
+            operation = msvcrt.getch().decode("ASCII").lower()
+        else:
+            operation = getch.getch().lower()   
+        if operation in "wasde":
+            if operation == "e":
+                return "\nGame over"
+            clearscreen()
+            board_view = check_move(board_view,operation)
+            print(display_game(board_view))
+            return game_play(board_view)
+        else:
+            print("Invalid Move")
+            return game_play(board_view)
 
-NUM_TO_WIN = 16
-board_size = 2
-initial_board_view = initial_setup()
-print(display_game(initial_board_view))
-operation = input("Enter w/a/s/d to play or e to exit: ")
-print(game_play(initial_board_view, operation))
-#board_size = int(argv[2])
-#NUM_TO_WIN = int(argv[4])
-#print(display_game(board_view))
-#print("Enter w/a/s/d")
-#n=input()
-#clearscreen()
-#print(display_game(check_move(board_view, board_size,NUM_TO_WIN,n)))
+def is_power_of_two(number):
+    if number == 2:
+        return True
+    log_base_two = math.log(number)
+    return log_base_two.is_integer()
+
+#taking input from command line
+parser = argparse.ArgumentParser()
+parser.add_argument('--n', type = int, action = 'store', dest = 'board_size', default = 5)
+parser.add_argument('--x', type = int, action = 'store', dest = 'NUM_TO_WIN', default = 2048)
+args = parser.parse_args()
+board_size = args.board_size
+NUM_TO_WIN = args.NUM_TO_WIN #if is_power_of_two(args.NUM_TO_WIN) else 2048
+clearscreen()
+print("You must get",NUM_TO_WIN,"to win")
+#driver code
+if board_size == 1 and  NUM_TO_WIN == 2:
+    print("Game won")
+else:
+    initial_board=initial_setup()
+    print(display_game(initial_board))
+    print(game_play(initial_board))
