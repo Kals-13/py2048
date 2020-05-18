@@ -1,10 +1,11 @@
 # py2048
 2048 game
 
-**On Windows**:
+This program was originally written on Windows 10 using Atom Text editor and run using Windows Powershell.
 <br />
+**On Windows**:
 	This code makes use of msvcrt module of python to implement getch type function. This feature is available only for Windows/DOS.
-
+<br />
 **For UNIX based operating system**:
 <br />
  1)First install pip3 or pip depending upon python version. To check python version, type _```python --version ```_  . You should see something like this.
@@ -28,7 +29,8 @@ or to specify any one input, just write that respective argument only, else youâ
 **How it works** : 
 <br />
  1)After you run the program, it will display the board of specified dimensions.
- ![initial setup](https://user-images.githubusercontent.com/64476047/82215205-a42d4200-9934-11ea-954f-e25c320d758a.png)
+ <br />
+ ![initial setup](https://user-images.githubusercontent.com/64476047/82215205-a42d4200-9934-11ea-954f-e25c320d758a.png
  <br />
  In this example board size is 3 and number required to win is 32.
 <br />
