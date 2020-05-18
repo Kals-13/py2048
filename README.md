@@ -7,8 +7,10 @@
 
 **For UNIX based operating system**:
 <br />
- 1)First install pip3 or pip depending upon python version. To check python version, type _```python --version ```_  .
+ 1)First install pip3 or pip depending upon python version. To check python version, type _```python --version ```_  . You should see something like this.
  <br />
+ ![test-python](https://user-images.githubusercontent.com/64476047/82217543-3256f780-9938-11ea-9fa1-270a0a452898.png)
+<br />
  2)Then type _```sudo apt-get install pip3```_ or _```sudo apt-get install pip_```. 
  <br />
  3)For downloading getch function, _```pip3 install getch```_. You can now run the code.
