@@ -127,7 +127,7 @@ parser.add_argument('--n', type = int, action = 'store', dest = 'board_size', de
 parser.add_argument('--x', type = int, action = 'store', dest = 'NUM_TO_WIN', default = 2048)
 args = parser.parse_args()
 board_size = args.board_size
-NUM_TO_WIN = args.NUM_TO_WIN #if is_power_of_two(args.NUM_TO_WIN) else 2048
+NUM_TO_WIN = args.NUM_TO_WIN 
 clearscreen()
 print("You must get",NUM_TO_WIN,"to win")
 #driver code
