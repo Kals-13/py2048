@@ -37,8 +37,10 @@ or to specify any one input, just write that respective argument only, else youâ
  <br />
  ![intermediate final](https://user-images.githubusercontent.com/64476047/82215738-7bf21300-9935-11ea-9fcc-4ed0f990ece7.png)
  <br />
- 5)When you get the required number to win(X) on your board, you win the game and the program stops.
+ 5)When you get the required number to win(X) on your board, you win the game and the program stops. In this example, since we got the highlighted number(32), program gives a message game won
  <br />
+ ![game won final](https://user-images.githubusercontent.com/64476047/82216234-4bf73f80-9936-11ea-98e2-077044623a05.png)
+<br />
  6)Other case, if you canâ€™t play any more moves, you get a message game lost and program stops. It looks like this.                
  ![game lost final](https://user-images.githubusercontent.com/64476047/82214962-3c76f700-9934-11ea-9a90-2a7b0cb6ff55.png)
 
