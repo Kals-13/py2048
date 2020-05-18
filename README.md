@@ -32,7 +32,12 @@ or to specify any one input, just write that respective argument only, else youâ
 <br />
  2)Press ```w/a/s/d to shift numbers up/left/down/right respectively and e to quit.```
  <br />
- 3)If you enter any invalid move, i.e board doesn't change with a particular move played, it will ask you to try another move.  
+ 3)If you enter any invalid move, i.e board doesn't change with a particular move played, it will ask you to try another move. 
+ <br /> 
+ In the previous example, if we play "w" board doesn't change.
+ <br />
+ ![invalid move](https://user-images.githubusercontent.com/64476047/82216909-40584880-9937-11ea-8910-16c2ba6ef5dc.png)
+<br />
  4)On entering any valid move, the board will change accordingly. This is an intermediate stage of same example.
  <br />
  ![intermediate final](https://user-images.githubusercontent.com/64476047/82215738-7bf21300-9935-11ea-9fcc-4ed0f990ece7.png)
