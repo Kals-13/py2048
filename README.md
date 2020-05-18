@@ -26,7 +26,8 @@ or to specify any one input, just write that respective argument only, else youâ
 **How it works** : 
 <br />
  1)After you run the program, it will display the board of specified dimensions.
- <br />
+ ![initial setup](https://user-images.githubusercontent.com/64476047/82215205-a42d4200-9934-11ea-954f-e25c320d758a.png)
+<br />
  2)Press ```w/a/s/d to shift numbers up/left/down/right respectively and e to quit.```
  <br />
  3)If you enter any invalid move, i.e board doesn't change with a particular move played, it will ask you to try another move.  
