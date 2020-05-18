@@ -34,8 +34,10 @@ or to specify any one input, just write that respective argument only, else you�
  <br />
  5)When you get the required number to win(X) on your board, you win the game and the program stops.
  <br />
- 6)Other case, if you can’t play any more moves, you get a message game lost and program stops.                
- 
+ 6)Other case, if you can’t play any more moves, you get a message game lost and program stops. It looks like this.                
+ ![game lost final](https://user-images.githubusercontent.com/64476047/82214962-3c76f700-9934-11ea-9a90-2a7b0cb6ff55.png)
+
+
 
 
                                                                                         -Done by Kalyani Sains.
