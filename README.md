@@ -27,6 +27,8 @@ or to specify any one input, just write that respective argument only, else youâ
 <br />
  1)After you run the program, it will display the board of specified dimensions.
  ![initial setup](https://user-images.githubusercontent.com/64476047/82215205-a42d4200-9934-11ea-954f-e25c320d758a.png)
+ <br />
+ In this example board size is 3 and number required to win is 32.
 <br />
  2)Press ```w/a/s/d to shift numbers up/left/down/right respectively and e to quit.```
  <br />
